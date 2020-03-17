@@ -2,11 +2,37 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { createStore } from "redux";
+import reducer from './reducer'
+import initial from './initial'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(
+    reducer, 
+    initial,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+store.subscribe(() => {
+    let state = store.getState();
+    });
+    
+const render = () => {
+        let state = store.getState();
+        const handleIncrement1 = () => store.dispatch({ type: "PLAYER1SCORES" })
+        const handleIncrement2 = () => store.dispatch({ type: "PLAYER2SCORES" })
+        const reset = () => store.dispatch({ type: "RESET" })
+
+    ReactDOM.render(<App 
+        player1 = {state.player1}
+        player2 = {state.player2}
+        server = {state.server}
+        handleIncrement1 = {handleIncrement1}
+        handleIncrement2 = {handleIncrement2}
+        reset = {reset}
+        winner = {state.winner}
+        deuce = {state.deuce}
+        pastGames = {state.pastGames}
+        />, document.getElementById('root'));
+}
+
+store.subscribe(render);
+render();
