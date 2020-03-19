@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Scoreboard = ({ pastGames }) =>  (
+const Scoreboard = ({ pastGames, player1Name, player2Name }) =>  (
     pastGames.length >= 1 ? <table className="scoreTable">
         <thead>
             <tr>
                 <th style={{background: "darkGrey"}}></th>
-                <th style={{background: "lightGray"}}>Player 1</th>
-                <th style={{background: "lightGray"}}>Player 2</th>
+                <th style={{background: "lightGray"}}>{player1Name}</th>
+                <th style={{background: "lightGray"}}>{player2Name}</th>
             </tr>
         </thead>
         <tbody>

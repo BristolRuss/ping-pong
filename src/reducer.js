@@ -13,7 +13,7 @@ const server = state => {
     }  
 	else return {
         ...state,
-        server: total % 10 < state.alternate ? 1 : 2
+        server: (Math.floor((total) / state.alternate) % 2 + 1)
     };
 }
 const winner = state => {
@@ -39,7 +39,7 @@ const winner = state => {
         }
     }
     //works out if the game needs to go to deuce. This is for the serving mechanic
-    if (state.player1 >= 20 && state.player2 >= 20){
+    if (state.player1 >= state.target -1 && state.player2 >= state.target - 1){
         return{
             ...state,
             deuce: 1
@@ -50,16 +50,12 @@ const winner = state => {
 
 const reset = state => {
     return{
-        player1Name: "",
-        player2Name: "",
-        alternate: 5,
-        target: 21,
+        ...state,
         player1: 0,
         player2: 0,
         server: 1,
         winner: 0,
         deuce: 0,
-        pastGames: state.pastGames
     }
 }
 
@@ -68,7 +64,16 @@ const reducer = (state, action) => {
     case "PLAYER1SCORES": return winner(server(player1(state)));
     case "PLAYER2SCORES": return winner(server(player2(state)));
     case "RESET": return reset(state);
-    case "CLEAR" : return initial
+    case "SETTINGS" : return {...state, gameStarted: false}
+    case "CLEAR" : return initial;
+    case "SAVE_SETTINGS" : return {
+         ...state,
+        player1Name: action.player1Name,
+        player2Name: action.player2Name,
+        target: action.target,
+        alternate: action.alternate,
+        gameStarted: true
+    }
     default: return state;
     }
 };

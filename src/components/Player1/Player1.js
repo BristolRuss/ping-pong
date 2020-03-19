@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Player1 = ({player1, server, handleIncrement1, winner}) =>  (
+const Player1 = ({player1, server, handleIncrement1, winner, player1Name}) =>  (
 <div className="col-md-6 mt-4">
     <div className= {server === 1 ? "card text-center bg-dark text-white" : "card text-center" }>
-        <h5 className="card-header">Player 1</h5>
+        <h5 className="card-header">{player1Name}</h5>
         <div className="card-body">
             <p className="card-text display-1">{player1}</p>
         </div>

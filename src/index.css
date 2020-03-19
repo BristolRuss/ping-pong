@@ -18,3 +18,22 @@ code {
   font-size: larger;
   text-align: center;
 }
+
+label {
+  display: block;
+}
+
+.buttonsBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settingsForm{
+  width: 50vw;
+}
+
+.settings {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}

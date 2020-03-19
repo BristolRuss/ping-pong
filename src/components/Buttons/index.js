@@ -1,10 +1,12 @@
 import { connect } from "react-redux";
-import Buttons from './Buttons'
+import Buttons from './Buttons';
+import { reset, settings, clear } from '../../actions';
 
 const mapDispatchToProps = dispatch => {
     return {
-        reset : () => dispatch({ type: "RESET" }),
-        clear : () => dispatch({ type: "CLEAR" })
+        reset : () => dispatch(reset()),
+        settings: () => dispatch(settings()),
+        clear : () => dispatch(clear())
     }
 };
 

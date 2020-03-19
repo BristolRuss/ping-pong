@@ -1,4 +1,5 @@
 const initial = {
+    gameStarted: false,
     player1Name: "",
     player2Name: "",
     alternate: 5,
