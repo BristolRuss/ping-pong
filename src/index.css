@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.scoreTable {
+  width: 70vw;
+  font-size: larger;
+  text-align: center;
+}

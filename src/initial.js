@@ -1,4 +1,8 @@
 const initial = {
+    player1Name: "",
+    player2Name: "",
+    alternate: 5,
+    target: 21,
     player1: 0,
     player2: 0,
     server: 1,

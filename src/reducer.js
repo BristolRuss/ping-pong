@@ -1,7 +1,8 @@
-import initial from './initial'
+import initial from "./initial";
 
 const player1 = state => ({ ...state, player1: state.player1 + 1 });
 const player2 = state => ({ ...state, player2: state.player2 + 1 });
+
 const server = state => {
     const total = state.player1 + state.player2
     if (state.deuce === 1){
@@ -12,24 +13,29 @@ const server = state => {
     }  
 	else return {
         ...state,
-        server: total % 10 <= 4 ? 1 : 2
+        server: total % 10 < state.alternate ? 1 : 2
     };
 }
 const winner = state => {
-    // const updatedGame = [...state, {player1: state.player1, player2: state.player2}]
+    const updatedGame = [...state.pastGames, 
+        {
+            player1: {score: state.player1, winner: state.player1 > state.player2}, 
+            player2: {score: state.player2, winner: state.player2 > state.player1}
+        }
+        ]
 
-    if (state.player1 >= 21 && (state.player1 - state.player2) >= 2){
+    if (state.player1 >= state.target && (state.player1 - state.player2) >= 2){
         return{
         ...state,
         winner: 1,
-        // pastGames: updatedGame
+        pastGames: updatedGame
         }
     }
-    else if ((state.player2 >= 21 && (state.player2 - state.player1)) >= 2){
+    else if ((state.player2 >= state.target && (state.player2 - state.player1)) >= 2){
         return{
         ...state,
         winner: 2,
-        // pastGames: updatedGame
+        pastGames: updatedGame
         }
     }
     //works out if the game needs to go to deuce. This is for the serving mechanic
@@ -42,11 +48,27 @@ const winner = state => {
     else return state
 }
 
+const reset = state => {
+    return{
+        player1Name: "",
+        player2Name: "",
+        alternate: 5,
+        target: 21,
+        player1: 0,
+        player2: 0,
+        server: 1,
+        winner: 0,
+        deuce: 0,
+        pastGames: state.pastGames
+    }
+}
+
 const reducer = (state, action) => {
     switch (action.type) {
     case "PLAYER1SCORES": return winner(server(player1(state)));
     case "PLAYER2SCORES": return winner(server(player2(state)));
-    case "RESET": return initial
+    case "RESET": return reset(state);
+    case "CLEAR" : return initial
     default: return state;
     }
 };
