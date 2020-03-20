@@ -8,29 +8,29 @@ import Buttons from "../Buttons";
 import Settings from '../Settings';
 
 const App = ( {gameStarted} ) => (
-<> 
-    <header className="jumbotron mt-4 mb-0">
-        <h1>Ping Pong</h1>
-    </header>
+<>  
+    <div className="bg">
+        <header className="pingHeader jumbotron mt-4 mb-0">
+            <h1 className="headerH1">Ping Pong</h1>
+        </header>
 
-    { !gameStarted ? 
-    <Settings /> : 
-    <>
-    <div className="row mb-4">
-        <Player1 />
-        <Player2 />
-    </div>
+        { !gameStarted ? 
+        <Settings /> : 
+        <>
+        <div className="imageLocation row mb-4">
+            <Player1 />
+            <Player2 />
+        </div>
 
-    <Winner />
-    <Deuce />
-    
-    <hr />
+        <Winner />
+        <Deuce />
 
-    <Buttons />
+        <Buttons />
 
-    <Scoreboard />
-    </>
-    }
+        <Scoreboard />
+        </>
+        }
+    </div> 
 </>
     
 );

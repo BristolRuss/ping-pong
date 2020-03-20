@@ -40,7 +40,7 @@ const Settings = ({ player1Name, player2Name, target, alternate, handleFormSubmi
                     <input onChange = {handleAim} value = { aim } type = "number" className="form-control"></input>
                     <label>Alternate Every</label>
                     <input onChange = {handleSwitch} value = { switchOn } type = "number" className="form-control"></input>
-                    <button className = "btn btn-success">Save Settings</button>
+                    <button className = "btn btn-dark">Save Settings</button>
                 </div>
             </form>
 
